@@ -15,4 +15,6 @@ trait Game {
   def score: Map[Player, Double]
 
   def makeMove(move: Card): GameState
+
+  def state: GameState
 }
