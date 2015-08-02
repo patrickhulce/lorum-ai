@@ -12,6 +12,8 @@ import com.patrickhulce.lorum.Cards.Suit._
 class TrickBasedGameSpec extends Specification {
 
   class TestTrickBasedGame(s: GameState) extends TrickBasedGame(s) {
+    val state = s
+
     override def score: Map[Player, Double] = Map.empty
   }
 
