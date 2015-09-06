@@ -8,7 +8,7 @@ import com.patrickhulce.lorum.{Game, Player, GameState}
 
 class GameRunner[T <: Game](
   builder: GameBuilder[T],
-  players: Map[Player, AI],
+  players: Map[Player, AI[T]],
   startingState: GameState
 ) {
   var game = builder(startingState)

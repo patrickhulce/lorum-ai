@@ -5,8 +5,8 @@ import com.patrickhulce.lorum.{Player, Game}
 
 import scala.util.Random
 
-object RandomAI extends AI {
-  def nextMove(game: Game, player: Player): Card = {
+class RandomAI[GameType <: Game] extends AI[GameType] {
+  def nextMove(game: GameType, player: Player): Card = {
     val possibleMoves = game.availableMoves(player)
     Random.shuffle(possibleMoves.toList).head
   }

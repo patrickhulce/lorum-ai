@@ -14,8 +14,8 @@ import org.specs2.runner.JUnitRunner
 @RunWith(classOf[JUnitRunner])
 class GameRunnerSpec extends Specification {
 
-  case class BogusAI(move: Card) extends AI {
-    def nextMove(game: Game, player: Player) = move
+  case class BogusAI(move: Card) extends AI[HeartsGame] {
+    def nextMove(game: HeartsGame, player: Player) = move
   }
 
   val players = List(Player(1), Player(2), Player(3), Player(4))
@@ -83,7 +83,7 @@ class GameRunnerSpec extends Specification {
     }
 
     "go until completion" in {
-      val ais = players.map(_ -> RandomAI).toMap
+      val ais = players.map(_ -> new RandomAI[HeartsGame]).toMap
       val hands = Dealer.dealTo(players)
       val state = GameState(players, hands, List.empty)
       val runner = new GameRunner[HeartsGame](HeartsBuilder, ais, state)
@@ -98,7 +98,7 @@ class GameRunnerSpec extends Specification {
     }
 
     "simulate 1000 games in <1s" in {
-      val ais = players.map(_ -> RandomAI).toMap
+      val ais = players.map(_ -> new RandomAI[HeartsGame]).toMap
 
       val startTime = System.currentTimeMillis
       for (i <- 1 to 1000) {
